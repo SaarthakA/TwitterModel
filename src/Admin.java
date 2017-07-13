@@ -19,6 +19,7 @@ public class Admin extends javax.swing.JFrame {
     private DefaultMutableTreeNode root = new DefaultMutableTreeNode(group.getRoot());
     private DefaultTreeModel model = new DefaultTreeModel(root);
     
+    //Admin class based on Singleton
     //constructor
      private Admin() {
         GroupIDs = new <String> ArrayList();
