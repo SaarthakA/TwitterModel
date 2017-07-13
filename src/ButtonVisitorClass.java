@@ -2,6 +2,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+//Visitor pattern based PricingVisitor since total is needed from each button in the GUI
+//setters should get Lists from Admin class that has the all the users
 public class ButtonVisitorClass implements ButtonVisitor{
     private int totalUsers = 0;
     private int positiveCount = 0;
