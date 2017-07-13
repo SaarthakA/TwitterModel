@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
+//User based on Observer
 public class User extends Observable implements Observer{
     private String id;
     private List<User> followers;
@@ -64,6 +65,7 @@ public class User extends Observable implements Observer{
     }
     
     
+    //update method and check positive word output per user
     public void message(String input){
         tweet = input;
         setChanged();
