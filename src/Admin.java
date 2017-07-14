@@ -203,7 +203,7 @@ public class Admin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Already exists.", "Add Error", JOptionPane.INFORMATION_MESSAGE); //nonunique id error
             }
         }
-        //TODO: Tree doesnt show for multiple User
+        
         model.reload(root);
         expandTree(jTree1, 0, jTree1.getRowCount());
         InputId.setText("");
@@ -280,7 +280,7 @@ public class Admin extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Already exists.", "Add Error", JOptionPane.INFORMATION_MESSAGE); //non unique id error
             }
         }
-         //TODO: Tree doesnt show for multiple Groups
+        
         model.reload(root);
         expandTree(jTree1, 0, jTree1.getRowCount());
         InputGroupId.setText("");
@@ -305,7 +305,7 @@ public class Admin extends javax.swing.JFrame {
     private javax.swing.JTree jTree3;
     // End of variables declaration//GEN-END:variables
    
-    //expansion of JTree, not working correctly
+ 
     private void expandTree(JTree tree, int start, int rows) {
         for (int i = start; i < rows; ++i) {
             tree.expandRow(i);
