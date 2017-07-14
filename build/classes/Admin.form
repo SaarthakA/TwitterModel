@@ -192,7 +192,7 @@
       <SubComponents>
         <Component class="javax.swing.JTree" name="jTree1">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree(root)"/>
+            <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JTree(model)"/>
           </AuxValues>
         </Component>
       </SubComponents>

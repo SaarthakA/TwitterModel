@@ -58,7 +58,7 @@ public class Admin extends javax.swing.JFrame {
         ShowMessageTotal = new javax.swing.JButton();
         ShowPositivePercentage = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree(root);
+        jTree1 = new javax.swing.JTree(model);
 
         jScrollPane2.setViewportView(jTree2);
 
@@ -197,7 +197,8 @@ public class Admin extends javax.swing.JFrame {
                     DefaultMutableTreeNode userNode = new DefaultMutableTreeNode(user.getID(), false);
                     UserIDs.add(InputId.getText());
                     users.add(user);
-                    root.add(userNode);
+                    model.insertNodeInto(userNode, root, 0);    
+                    //root.add(userNode);
             } else {
                 JOptionPane.showMessageDialog(null, "Already exists.", "Add Error", JOptionPane.INFORMATION_MESSAGE); //nonunique id error
             }
