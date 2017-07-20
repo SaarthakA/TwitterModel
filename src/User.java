@@ -13,8 +13,22 @@ public class User extends Observable implements Observer{
     private String tweet;
     private int positiveWords;
     private int messageTotal;
-      private String[] happyWords = {"good", "great", "excellent", "delighted", "friend",
+    private long creationTime;
+    private long lastUpdateTime;
+    private String[] happyWords = {"good", "great", "excellent", "delighted", "friend",
         "lol", "lmao", "haha", "awesome", "best", "amazing"};
+    
+    public long getCreationTime(){
+        return this.creationTime;
+    }
+    
+    public long getLastUpDateTime(){
+        return this.lastUpdateTime;
+    }
+    
+    public void setLastUpdateTime(){
+        this.lastUpdateTime = System.currentTimeMillis();
+    }
     
     public String getID(){
         return this.id;
@@ -33,11 +47,12 @@ public class User extends Observable implements Observer{
     
     public User(String ID){
         this.id = ID;
-        followers = new <User> ArrayList();
-        following = new <String> ArrayList();
-        news = new <String> ArrayList();
-        positiveWords = 0;
-        messageTotal = 0;
+        this.followers = new <User> ArrayList();
+        this.following = new <String> ArrayList();
+        this.news = new <String> ArrayList();
+        this.positiveWords = 0;
+        this.messageTotal = 0;
+        this.creationTime = System.currentTimeMillis();
     }
     
     public List<String> getNews(){
@@ -76,7 +91,7 @@ public class User extends Observable implements Observer{
             }
         }
         messageTotal++;
-        
+        setLastUpdateTime();
     }
     
     //not implemented

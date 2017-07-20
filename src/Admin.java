@@ -1,7 +1,11 @@
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
@@ -59,6 +63,8 @@ public class Admin extends javax.swing.JFrame {
         ShowPositivePercentage = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree(model);
+        Verify = new javax.swing.JButton();
+        LastUpdate = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jTree2);
 
@@ -131,32 +137,54 @@ public class Admin extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jTree1);
 
+        Verify.setText("Verify IDs");
+        Verify.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VerifyActionPerformed(evt);
+            }
+        });
+
+        LastUpdate.setText("Last Updated User");
+        LastUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LastUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(InputId)
-                            .addComponent(InputGroupId, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(InputId)
+                                    .addComponent(InputGroupId, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(AddGroup, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                                    .addComponent(AddUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(OpenUserView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ShowMessageTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ShowUserTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(ShowGroupTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ShowPositivePercentage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(32, 32, 32))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(Verify)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(AddGroup, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
-                            .addComponent(AddUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(OpenUserView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ShowMessageTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ShowUserTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(ShowGroupTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ShowPositivePercentage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(32, 32, 32))
+                        .addComponent(LastUpdate)
+                        .addGap(66, 66, 66))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +199,11 @@ public class Admin extends javax.swing.JFrame {
                     .addComponent(AddGroup))
                 .addGap(18, 18, 18)
                 .addComponent(OpenUserView)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Verify)
+                    .addComponent(LastUpdate))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ShowUserTotal)
                     .addComponent(ShowGroupTotal))
@@ -286,17 +318,61 @@ public class Admin extends javax.swing.JFrame {
         InputGroupId.setText("");
     }//GEN-LAST:event_AddGroupActionPerformed
 
+    private void VerifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VerifyActionPerformed
+    Set <String> seenValues = new HashSet();
+    Pattern pattern = Pattern.compile("\\s"); //white space checker
+    Matcher matcher;
+    //iterate through List to see if duplicates or contains whitespace
+    for(String value : UserIDs){
+        matcher = pattern.matcher(value);
+        if(seenValues.contains(value) || matcher.find()){
+            JOptionPane.showMessageDialog(null, "Verify Error in User IDs.", "ID Verify Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        else{
+            seenValues.add(value);
+        }
+    }
+    for(String value : GroupIDs){
+        matcher = pattern.matcher(value);
+        if(seenValues.contains(value) || matcher.find()){
+            JOptionPane.showMessageDialog(null, "Verify Error in Group IDs.", "ID Verify Error", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        else{
+            seenValues.add(value);
+        }
+        
+    }  
+       JOptionPane.showMessageDialog(null, "All IDs are OK.", "ID Verify No Error", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_VerifyActionPerformed
+
+    private void LastUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LastUpdateActionPerformed
+        long latest = users.get(0).getLastUpDateTime(); // earliest time updated
+        User display = users.get(0); //last updated user
+        for(User user: users){
+            if(latest < user.getLastUpDateTime()){
+                latest = user.getLastUpDateTime();
+                display = user;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Last Up Dated User ID: " + display.getID(), "ID Verify No Error", JOptionPane.INFORMATION_MESSAGE);
+        
+    }//GEN-LAST:event_LastUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddGroup;
     private javax.swing.JButton AddUser;
     private javax.swing.JTextField InputGroupId;
     private javax.swing.JTextField InputId;
+    private javax.swing.JButton LastUpdate;
     private javax.swing.JButton OpenUserView;
     private javax.swing.JButton ShowGroupTotal;
     private javax.swing.JButton ShowMessageTotal;
     private javax.swing.JButton ShowPositivePercentage;
     private javax.swing.JButton ShowUserTotal;
+    private javax.swing.JButton Verify;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
